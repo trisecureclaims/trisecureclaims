@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Provider Empanelment Services</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+           .gradient-dark {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f4d496 0%, #f5dcac 100%);            ;
+        }
+        .gradient-bgt{
+            background-color: #ea580c;
+        }
+        
+        .gradient-light {
+            background: linear-gradient(135deg, #fff5f2 0%, #ffffff 100%);
+        }
+        
+        .shadow-custom {
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.1);
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.15);
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+          .navbar {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            padding: 0 2rem;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(232, 119, 58, 0.1);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(232, 119, 58, 0.2);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e8773a, transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 90px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-placeholder {
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(232, 119, 58, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(232, 119, 58, 0.4);
+        }
+
+        .logo-placeholder:hover::before {
+            animation: logoShine 0.6s ease-in-out;
+        }
+
+        @keyframes logoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .company-name {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .company-name:hover {
+            color: #e8773a;
+            text-shadow: 0 0 10px rgba(232, 119, 58, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 3rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            padding: 1rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            display: block;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e8773a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e8773a;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #e8773a;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            display: inline-block;
+            margin-left: 8px;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid #ffffff;
+            transition: all 0.3s ease;
+            vertical-align: middle;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+            border-top-color: #e8773a;
+        }
+
+        .nav-link.active .dropdown-arrow {
+            border-top-color: #e8773a;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            min-width: 220px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1001;
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            color: #ffffff;
+            padding: 15px 24px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #e8773a, #ff9f5a);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .dropdown-item:hover {
+            color: #ffffff;
+            padding-left: 32px;
+            transform: translateX(8px);
+        }
+
+        .dropdown-item:hover::before {
+            width: 100%;
+        }
+
+        .dropdown-item.active {
+            background: linear-gradient(90deg, #e8773a, #ff9f5a);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+       
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000000;
+                flex-direction: column;
+                gap: 0;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+                border-top: 1px solid #333;
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-item {
+                border-bottom: 1px solid #333;
+            }
+
+            .nav-link {
+                padding: 1rem 2rem;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                background-color: #111;
+            }
+
+            .dropdown-item {
+                padding-left: 3rem;
+                background-color: #111;
+            }
+
+            .dropdown-item:hover {
+                padding-left: 3.5rem;
+            }
+
+            .company-name {
+                font-size: 18px;
+            }
+
+            .demo-content h1 {
+                font-size: 2rem;
+            }
+        }
+    /* Show dropdown with animation */
+    .nav-links li:hover .dropdown {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+      path{
+        color: #ea580c;
+      }
+   
+    </style>
+  </style>
+ </head>
+ <body class="min-h-full">
+    <!-- Navigation -->
+  <nav class="navbar">
+   <div class="nav-container">
+    <div class="logo-section">
+     <div class="logo-placeholder">
+      
+     </div><img src="trisecurelogohalf.png" height="150px" width="300px">
+    </div>
+    <ul class="nav-menu" id="navMenu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-page="home" id="homeLink">Home</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-page="about" id="aboutLink">About Us</a></li>
+     <li class="nav-item dropdown"><a href="" class="nav-link" data-page="services" id="servicesLink">Services<span class="dropdown-arrow"></span></a>
+      <div class="dropdown-content"><a href="reimburstment.html" class="dropdown-item" data-page="reimbursement">Reimbursement</a> <a href="cashless.html" class="dropdown-item" data-page="cashless">Cashless</a> <a href="empanelment.html" class="dropdown-item" data-page="empanelment">Empanelment</a> <a href="raterevision.html" class="dropdown-item" data-page="rate-revision">Rate Revision</a> <a href="recovery.html" class="dropdown-item" data-page="recovery">Recovery</a> <a href="desksupport.html" class="dropdown-item" data-page="desk-support">Desk Support</a>
+      </div></li>
+     <li class="nav-item"><a href="career.html" class="nav-link" data-page="career" id="careerLink">Career</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-page="contact" id="homeLink">Contact</a></li>
+     <li class="nav-item"><a href="payment.html" class="nav-link" data-page="payment" id="paymentLink">Payment</a></li>
+    </ul>
+    <div class="mobile-menu-toggle" id="mobileToggle">
+     <div class="hamburger-line"></div>
+     <div class="hamburger-line"></div>
+     <div class="hamburger-line"></div>
+    </div>
+   </div>
+  </nav>
+  <!-- Hero Section -->
+  <header id="home" class="gradient-bg text-white">
+   <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="text-center">
+     <div class="mb-6">
+      <svg class="w-16 h-16 mx-auto mb-4 text-white" fill="currentColor" viewbox="0 0 24 24">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-4v-6h4v6zm0-8h-4V7h4v2z" /> <circle cx="12" cy="12" r="1.5" />
+      </svg>
+     </div>
+     <h1 id="main-title" class="text-4xl md:text-5xl font-bold mb-4 leading-tight"><span style="color: black; font-size: 3.75rem;">Hassle-Free</span><span style="color: #ea580c; font-size: 3.75rem;"> Empanelment Services </span></h1>
+     <p id="hero-subtitle" class="text-xl mb-8 opacity-90 max-w-3xl mx-auto"><span style="color: #4b5563;">Streamline your healthcare provider network enrollment with our comprehensive empanelment solutions. Join leading healthcare networks efficiently and professionally. </span></p><button id="cta-button" onclick="scrollToForm()" class="bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"> Start Empanelment Process </button>
+    </div>
+   </div>
+  </header>
+  <!-- Features Section -->
+  <section id="services" class="py-16 bg-gray-50">
+   <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-12">
+     <h2 class="text-3xl font-bold text-gray-800 mb-4">Why Choose Our Empanelment Services?</h2>
+     <p class="text-gray-600 max-w-2xl mx-auto">We simplify the complex process of healthcare provider enrollment with expert guidance and streamlined workflows.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+     <div class="text-center p-6 bg-white rounded-xl shadow-custom">
+      <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+       <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Expert Guidance</h3>
+      <p class="text-gray-600">Professional support throughout the entire empanelment process with industry expertise.</p>
+     </div>
+     <div class="text-center p-6 bg-white rounded-xl shadow-custom">
+      <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+       <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Fast Processing</h3>
+      <p class="text-gray-600">Streamlined workflows to reduce processing time and get you enrolled quickly.</p>
+     </div>
+     <div class="text-center p-6 bg-white rounded-xl shadow-custom">
+      <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+       <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Quality Assurance</h3>
+      <p class="text-gray-600">Comprehensive review process ensuring all requirements are met accurately.</p>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- Application Form Section -->
+  <section id="application-form" class="py-16 gradient-light">
+  <div class="max-w-4xl mx-auto px-6">
+
+    <div class="text-center mb-12">
+      <h2 id="form-title" class="text-3xl font-bold text-gray-800 mb-4">
+        Healthcare Provider Application
+      </h2>
+      <p class="text-gray-600">
+        Please fill out the form below to begin your empanelment process. All fields are required.
+      </p>
+    </div>
+
+    <!-- SUCCESS MESSAGE -->
+    <div id="success-message" class="hidden success-message text-white p-6 rounded-lg mb-8 text-center bg-green-600">
+      <div class="flex items-center justify-center mb-2">
+        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span class="font-semibold">Application Submitted Successfully!</span>
+      </div>
+      <p>
+        Thank you for your application. Our team will review your submission and contact you within 2–3 business days.
+      </p>
+    </div>
+
+    <!-- FORM START -->
+    <form id="empanelment-form" class="bg-white rounded-xl shadow-custom p-8" 
+      action="https://formspree.io/f/myzlknzd" method="POST">
+
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Hospital/Clinic Name *</label>
+          <input type="text" name="hospital_name" required
+            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Hospital Type *</label>
+          <select name="hospital_type" required
+            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+            <option value="">Select hospital type</option>
+            <option value="General Hospital">General Hospital</option>
+            <option value="Specialty Hospital">Specialty Hospital</option>
+            <option value="Multi-Specialty Hospital">Multi-Specialty Hospital</option>
+            <option value="Clinic">Clinic</option>
+            <option value="Diagnostic Center">Diagnostic Center</option>
+            <option value="Nursing Home">Nursing Home</option>
+            <option value="Rehabilitation Center">Rehabilitation Center</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Contact Person Name *</label>
+          <input type="text" name="contact_person" required
+            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+          <input type="email" name="email" required
+            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
+          <input type="tel" name="phone" required
+            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Complete Address *</label>
+          <input type="text" name="address" required
+            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Services/Specialties Offered *</label>
+        <textarea name="services" rows="3" required
+          class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 resize-none"></textarea>
+      </div>
+
+      <div class="mb-8">
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Facilities Available *</label>
+        <textarea name="facilities" rows="3" required
+          class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 resize-none"></textarea>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" id="submit-btn"
+          class="gradient-bgt text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all shadow-lg">
+          <span id="submit-text">Submit Application</span>
+          <span id="loading-spinner" class="hidden ml-2">
+            <svg class="animate-spin h-5 w-5 inline" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke-width="4" fill="none"/>
+              <path class="opacity-75" fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.3 0 0 5.3 0 12h4z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </form>
+
+    <div class="text-center mt-8">
+      <p class="text-gray-600 text-sm italic">
+        * Pricing varies depending on company policies and services selected.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- JAVASCRIPT TO STOP REDIRECT + SHOW SUCCESS -->
+<script>
+document.getElementById("empanelment-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById("submit-btn");
+  const spinner = document.getElementById("loading-spinner");
+  const submitText = document.getElementById("submit-text");
+  const successMessage = document.getElementById("success-message");
+
+  submitBtn.disabled = true;
+  spinner.classList.remove("hidden");
+  submitText.textContent = "Submitting...";
+
+  const formData = new FormData(this);
+
+  const response = await fetch(this.action, {
+    method: "POST",
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  });
+
+  submitBtn.disabled = false;
+  spinner.classList.add("hidden");
+  submitText.textContent = "Submit Application";
+
+  if (response.ok) {
+    successMessage.classList.remove("hidden");
+    this.reset();
+  } else {
+    alert("There was an error submitting your form. Please try again.");
+  }
+});
+</script>
+<!-- Footer -->
+      <!-- Footer -->
+    <footer class="gradient-dark text-white py-16 relative overflow-hidden">
+        <div class="absolute top-0 left-0 text-orange-500 opacity-10">
+            <i class="fas fa-network-wired text-8xl"></i>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="text-3xl font-bold mb-6">
+                       <img src="trisecurelogohalf.png" height="150" width="350">
+                    </div>
+                    <p class="text-gray-300 mb-8 text-lg leading-relaxed">Your trusted partner in professional claim processing services. We deliver excellence, reliability, and precision in every claim we handle with cutting-edge technology and expert care.</p>
+                    <div class="flex space-x-6">
+                        <a href="https://www.facebook.com/profile.php?id=61572941290909" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/trisecure-claims-5939b5399/" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/trisecureclaims/" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Quick Links</h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-cogs mr-2"></i>Services</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Contact Info</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <span class="text-gray-300">+91-9833-08-6355</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <span class="text-gray-300">trisecureclaims@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <span class="text-gray-300">Thane, Maharashtra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-12 pt-8 text-center">
+                <p class="text-gray-300 text-lg">&copy; 2024 TrisecureClaims. All rights reserved. | Designed with <i class="fas fa-heart text-orange-500"></i> for Healthcare Excellence</p>
+            </div>
+        </div>
+    </footer>
+  <script>
+        let currentData = [];
+        let isSubmitting = false;
+
+        const defaultConfig = {
+            main_title: "Healthcare Provider Empanelment Services",
+            hero_subtitle: "Streamline your healthcare provider network enrollment with our comprehensive empanelment solutions. Join leading healthcare networks efficiently and professionally.",
+            cta_button_text: "Start Empanelment Process",
+            form_title: "Healthcare Provider Application",
+            pricing_note: "* Pricing varies depending on company policies and services selected."
+        };
+
+        const dataHandler = {
+            onDataChanged(data) {
+                currentData = data;
+                // Update UI if needed - for this form, we mainly just store submissions
+            }
+        };
+
+        async function onConfigChange(config) {
+            const mainTitle = config.main_title || defaultConfig.main_title;
+            const heroSubtitle = config.hero_subtitle || defaultConfig.hero_subtitle;
+            const ctaButtonText = config.cta_button_text || defaultConfig.cta_button_text;
+            const formTitle = config.form_title || defaultConfig.form_title;
+            const pricingNote = config.pricing_note || defaultConfig.pricing_note;
+
+            document.getElementById('main-title').textContent = mainTitle;
+            document.getElementById('hero-subtitle').textContent = heroSubtitle;
+            document.getElementById('cta-button').textContent = ctaButtonText;
+            document.getElementById('form-title').textContent = formTitle;
+            document.getElementById('pricing-note').textContent = pricingNote;
+        }
+
+        function scrollToForm() {
+            document.getElementById('application-form').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuBtn.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                `;
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuBtn.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                `;
+            }
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            if (isSubmitting) return;
+            
+            if (currentData.length >= 999) {
+                showError("Maximum limit of 999 applications reached. Please contact support.");
+                return;
+            }
+
+            isSubmitting = true;
+            showLoading(true);
+
+            const formData = new FormData(event.target);
+            
+            // Add Web3Forms access key (you'll need to replace this with your actual key)
+            formData.append('access_key', 'https://formspree.io/f/myzlknzd');
+            
+            // Add subject for the email
+            formData.append('subject', 'New Healthcare Provider Empanelment Application');
+            
+            // Add from name
+            formData.append('from_name', 'Healthcare Empanelment Portal');
+
+            const applicationData = {
+                hospital_name: formData.get('hospital-name'),
+                hospital_type: formData.get('hospital-type'),
+                contact_person: formData.get('contact-person'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                services: formData.get('services'),
+                facilities: formData.get('facilities'),
+                submitted_at: new Date().toISOString()
+            };
+
+            try {
+                // Submit to Web3Forms
+                const web3Response = await fetch('https://formspree.io/f/movyjkyk', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const web3Result = await web3Response.json();
+
+                if (web3Result.success) {
+                    // Also save to Canva Sheet
+                    const result = await window.dataSdk.create(applicationData);
+                    
+                    if (result.isOk) {
+                        showSuccess();
+                        event.target.reset();
+                    } else {
+                        showError("Application sent via email but failed to save to sheet. Please contact support if needed.");
+                    }
+                } else {
+                    showError("Failed to submit application. Please check your Web3Forms configuration and try again.");
+                }
+            } catch (error) {
+           }
+
+            isSubmitting = false;
+            showLoading(false);
+        }
+
+        function showLoading(show) {
+            const submitBtn = document.getElementById('submit-btn');
+            const submitText = document.getElementById('submit-text');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            
+            submitBtn.disabled = show;
+            
+            if (show) {
+                submitText.textContent = 'Submitting...';
+                loadingSpinner.classList.remove('hidden');
+            } else {
+                submitText.textContent = 'Submit Application';
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+
+        function showSuccess() {
+            const successMessage = document.getElementById('success-message');
+            successMessage.classList.remove('hidden');
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 5000);
+        }
+
+        function showError(message) {
+            // Create temporary error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'bg-red-500 text-white p-4 rounded-lg mb-6 text-center';
+            errorDiv.textContent = message;
+            
+            const form = document.getElementById('empanelment-form');
+            form.parentNode.insertBefore(errorDiv, form);
+            
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 5000);
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize Data SDK
+            if (window.dataSdk) {
+                const initResult = await window.dataSdk.init(dataHandler);
+                if (!initResult.isOk) {
+                    console.error("Failed to initialize data SDK");
+                }
+            }
+
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                await window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange,
+                    mapToCapabilities: (config) => ({
+                        recolorables: [
+                            {
+                                get: () => config.primary_color || "#ff6b35",
+                                set: (value) => {
+                                    config.primary_color = value;
+                                    window.elementSdk.setConfig({ primary_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.background_color || "#ffffff",
+                                set: (value) => {
+                                    config.background_color = value;
+                                    window.elementSdk.setConfig({ background_color: value });
+                                }
+                            }
+                        ],
+                        borderables: [],
+                        fontEditable: {
+                            get: () => config.font_family || "system-ui",
+                            set: (value) => {
+                                config.font_family = value;
+                                window.elementSdk.setConfig({ font_family: value });
+                            }
+                        },
+                        fontSizeable: {
+                            get: () => config.font_size || 16,
+                            set: (value) => {
+                                config.font_size = value;
+                                window.elementSdk.setConfig({ font_size: value });
+                            }
+                        }
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["main_title", config.main_title || defaultConfig.main_title],
+                        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                        ["cta_button_text", config.cta_button_text || defaultConfig.cta_button_text],
+                        ["form_title", config.form_title || defaultConfig.form_title],
+                        ["pricing_note", config.pricing_note || defaultConfig.pricing_note]
+                    ])
+                });
+            }
+
+            // Set up form submission
+            document.getElementById('empanelment-form').addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+      <script>
+    // Select all nav links
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        // Remove active class from all
+        navLinks.forEach(l => l.classList.remove("active"));
+        // Add to the clicked one
+        link.classList.add("active");
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'997afa4e50faffa5',t:'MTc2MTk5NTc2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

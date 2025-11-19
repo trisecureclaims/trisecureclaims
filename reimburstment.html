@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClaimsPro - Reimbursement Claim Processing Services</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #f4d496 0%, #f5dcac 100%);
+        }
+        
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .orange-gradient {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        }
+         .gradient-dark {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        }
+    </style>
+    <style>
+    /* Navbar container */
+     .navbar {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            padding: 0 2rem;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(232, 119, 58, 0.1);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(232, 119, 58, 0.2);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e8773a, transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 90px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-placeholder {
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(232, 119, 58, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(232, 119, 58, 0.4);
+        }
+
+        .logo-placeholder:hover::before {
+            animation: logoShine 0.6s ease-in-out;
+        }
+
+        @keyframes logoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .company-name {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .company-name:hover {
+            color: #e8773a;
+            text-shadow: 0 0 10px rgba(232, 119, 58, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 3rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            padding: 1rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            display: block;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e8773a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e8773a;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #e8773a;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            display: inline-block;
+            margin-left: 8px;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid #ffffff;
+            transition: all 0.3s ease;
+            vertical-align: middle;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+            border-top-color: #e8773a;
+        }
+
+        .nav-link.active .dropdown-arrow {
+            border-top-color: #e8773a;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            min-width: 220px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1001;
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            color: #ffffff;
+            padding: 15px 24px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #e8773a, #ff9f5a);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .dropdown-item:hover {
+            color: #ffffff;
+            padding-left: 32px;
+            transform: translateX(8px);
+        }
+
+        .dropdown-item:hover::before {
+            width: 100%;
+        }
+
+        .dropdown-item.active {
+            background: linear-gradient(90deg, #e8773a, #ff9f5a);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+       
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000000;
+                flex-direction: column;
+                gap: 0;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+                border-top: 1px solid #333;
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-item {
+                border-bottom: 1px solid #333;
+            }
+
+            .nav-link {
+                padding: 1rem 2rem;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                background-color: #111;
+            }
+
+            .dropdown-item {
+                padding-left: 3rem;
+                background-color: #111;
+            }
+
+            .dropdown-item:hover {
+                padding-left: 3.5rem;
+            }
+
+            .company-name {
+                font-size: 18px;
+            }
+
+            .demo-content h1 {
+                font-size: 2rem;
+            }
+        }
+
+    /* Show dropdown with animation */
+    .nav-links li:hover .dropdown {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+ 
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="min-h-full bg-white"><!-- Sticky Navigation -->
+  <nav class="navbar">
+   <div class="nav-container">
+    <div class="logo-section">
+     <div class="logo-placeholder">
+      
+     </div><img src="trisecurelogohalf.png" height="150px" width="300px">
+    </div>
+    <ul class="nav-menu" id="navMenu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-page="home" id="homeLink">Home</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-page="about" id="aboutLink">About Us</a></li>
+     <li class="nav-item dropdown"><a href="" class="nav-link" data-page="services" id="servicesLink">Services<span class="dropdown-arrow"></span></a>
+      <div class="dropdown-content"><a href="reimburstment.html" class="dropdown-item" data-page="reimbursement">Reimbursement</a> <a href="cashless.html" class="dropdown-item" data-page="cashless">Cashless</a> <a href="empanelment.html" class="dropdown-item" data-page="empanelment">Empanelment</a> <a href="raterevision.html" class="dropdown-item" data-page="rate-revision">Rate Revision</a> <a href="recovery.html" class="dropdown-item" data-page="recovery">Recovery</a> <a href="desksupport.html" class="dropdown-item" data-page="desk-support">Desk Support</a>
+      </div></li>
+     <li class="nav-item"><a href="career.html" class="nav-link" data-page="career" id="careerLink">Career</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-page="contact" id="homeLink">Contact</a></li>
+     <li class="nav-item"><a href="payment.html" class="nav-link" data-page="payment" id="paymentLink">Payment</a></li>
+    </ul>
+    <div class="mobile-menu-toggle" id="mobileToggle">
+     <div class="hamburger-line"></div>
+     <div class="hamburger-line"></div>
+     <div class="hamburger-line"></div>
+    </div>
+   </div>
+  </nav>
+  <!-- Hero Section -->
+  <section id="home" class="hero-gradient pt-20 pb-16">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+     <div class="flex justify-center mb-8">
+      <div class="w-20 h-20 orange-gradient rounded-full flex items-center justify-center icon-bounce">
+       <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+       </svg>
+      </div>
+     </div>
+     <h1 id="hero-headline" class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">Fast, Transparent &amp; Reliable<br><span class="text-orange-600">Reimbursement Claim Processing</span></h1>
+     <p id="hero-description" class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">We simplify and accelerate your reimbursement claims with cutting-edge technology and expert processing. Get your claims approved faster with complete transparency and reliability you can trust.</p>
+     <div class="flex flex-col sm:flex-row gap-4 justify-center"><button id="cta-button" class="orange-gradient text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"> Submit Claim </button> <button class="border-2 border-orange-600 text-orange-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-50 transition-colors"><a href="#pricing"> Learn More </a></button>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- Features Section -->
+  <section id="services" class="py-20 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Our Services?</h2>
+     <p class="text-xl text-gray-600 max-w-2xl mx-auto">Experience the difference with our comprehensive claim processing solutions</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8"><!-- Feature 1 -->
+     <div class="feature-card bg-white p-8 rounded-xl border border-gray-200">
+      <div class="w-16 h-16 orange-gradient rounded-lg flex items-center justify-center mb-6">
+       <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4">Lightning Fast Processing</h3>
+      <p class="text-gray-600">Process claims 10x faster than traditional methods with our automated workflow system and expert review team.</p>
+     </div><!-- Feature 2 -->
+     <div class="feature-card bg-white p-8 rounded-xl border border-gray-200">
+      <div class="w-16 h-16 orange-gradient rounded-lg flex items-center justify-center mb-6">
+       <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4">100% Secure &amp; Compliant</h3>
+      <p class="text-gray-600">Bank-level security with full HIPAA compliance ensures your sensitive information is always protected.</p>
+     </div><!-- Feature 3 -->
+     <div class="feature-card bg-white p-8 rounded-xl border border-gray-200">
+      <div class="w-16 h-16 orange-gradient rounded-lg flex items-center justify-center mb-6">
+       <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4">Complete Transparency</h3>
+      <p class="text-gray-600">Track your claims in real-time with detailed status updates and clear communication throughout the process.</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Stats Section -->
+  <section class="py-16 bg-gray-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 text-center">
+     <div>
+      <div class="text-4xl font-bold text-orange-600 mb-2">
+       125+
+      </div>
+      <div class="text-gray-600">
+       Hospitals
+      </div>
+     </div>
+     <div>
+      <div class="text-4xl font-bold text-orange-600 mb-2">
+       9 to 9 
+      </div>
+      <div class="text-gray-600">
+       Processing Hours
+      </div>
+     </div>
+     <div>
+      <div class="text-4xl font-bold text-orange-600 mb-2">
+       100+
+      </div>
+      <div class="text-gray-600">
+       Claims Processed
+      </div>
+     </div>
+     <div>
+      <div class="text-4xl font-bold text-orange-600 mb-2">
+       98.7%
+      </div>
+      <div class="text-gray-600">
+       Succeess Ratio
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Choose Your Plan</h2>
+     <p class="text-xl text-gray-600 max-w-2xl mx-auto">Select the reimbursement processing plan that best fits your needs</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"><!-- Standard Plan -->
+     <div class="bg-white p-8 rounded-xl border-2 border-gray-200 hover:border-orange-300 transition-colors">
+      <div class="text-center mb-8">
+       <h3 class="text-2xl font-bold text-gray-900 mb-2">Standard Reimbursement</h3>
+       <div class="text-4xl font-bold text-orange-600 mb-2">
+        3500/-
+       </div>
+       <div class="text-gray-600">
+        per claim
+       </div>
+      </div>
+      <ul class="space-y-4 mb-8">
+       <li class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg><span class="text-gray-700">5-7 business days processing</span></li>
+       <li class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg><span class="text-gray-700">Basic claim review</span></li>
+       <li class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg><span class="text-gray-700">Email status updates</span></li>
+       <li class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg><span class="text-gray-700">Standard support</span></li>
+      </ul><button onclick="openClaimForm('standard')" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"> Submit Standard Claim </button>
+     </div><!-- Advanced Plan -->
+     <div class="bg-white p-8 rounded-xl border-2 border-orange-500 relative">
+      <div class="absolute -top-4 left-1/2 transform -translate-x-1/2"><span class="bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-semibold">POPULAR</span>
+      </div>
+      <div class="text-center mb-8">
+       <h3 class="text-2xl font-bold text-gray-900 mb-2">Advanced Reimbursement</h3>
+       <div class="text-4xl font-bold text-orange-600 mb-2">
+        4500/-
+       </div>
+       <div class="text-gray-600">
+        per claim
+       </div>
+      </div>
+      <ul class="space-y-4 mb-8">
+       <li class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg><span class="text-gray-700">24-48 hours processing</span></li>
+       <li class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg><span class="text-gray-700">Expert claim review &amp; optimization</span></li>
+       <li class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg><span class="text-gray-700">Priority support &amp; consultation</span></li>
+       <li class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg><span class="text-gray-700">Appeal assistance included</span></li>
+      </ul><button onclick="openClaimForm('advanced')" class="w-full orange-gradient text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all"> Submit Advanced Claim </button>
+     </div>
+    </div>
+   </div>
+  </section><!-- Claim Form Modal -->
+  <div id="claimFormModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+   <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white rounded-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+     <div class="p-6 border-b border-gray-200">
+      <div class="flex justify-between items-center">
+       <h3 id="formTitle" class="text-2xl font-bold text-gray-900">Submit Your Claim</h3><button onclick="closeClaimForm()" class="text-gray-400 hover:text-gray-600">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg></button>
+      </div>
+     </div>
+     <form id="claimForm" class="p-6 space-y-6">
+      <div class="grid md:grid-cols-2 gap-6"><!-- Required Fields -->
+       <div><label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label> <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+       </div>
+       <div><label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label> <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+       </div>
+       <div><label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label> <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+       </div>
+       <div><label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label> <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+       </div>
+      </div><!-- Optional Fields -->
+      <div class="border-t border-gray-200 pt-6">
+       <h4 class="text-lg font-semibold text-gray-900 mb-4">Additional Information (Optional)</h4>
+       <div class="grid md:grid-cols-2 gap-6">
+        <div><label for="insuranceCompany" class="block text-sm font-medium text-gray-700 mb-2">Insurance Company</label> <input type="text" id="insuranceCompany" name="insuranceCompany" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+        </div>
+        <div><label for="hospitalName" class="block text-sm font-medium text-gray-700 mb-2">Hospital/Provider Name</label> <input type="text" id="hospitalName" name="hospitalName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+        </div>
+       </div>
+       <div class="mt-6"><label for="claimAmount" class="block text-sm font-medium text-gray-700 mb-2">Claim Amount ($)</label> <input type="number" id="claimAmount" name="claimAmount" step="0.01" min="0" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+       </div>
+      </div><!-- Hidden field for plan type --> <input type="hidden" id="planType" name="planType" value="">
+      <div class="flex gap-4 pt-6 border-t border-gray-200"><button type="button" onclick="closeClaimForm()" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"> Cancel </button> <button type="submit" class="flex-1 orange-gradient text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all"> Submit Claim </button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+  <!-- Footer -->
+ <footer class="gradient-dark text-white py-16 relative overflow-hidden">
+        <div class="absolute top-0 left-0 text-orange-500 opacity-10">
+            <i class="fas fa-network-wired text-8xl"></i>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="text-3xl font-bold mb-6">
+                       <img src="trisecurelogohalf.png" height="150" width="350">
+                    </div>
+                    <p class="text-gray-300 mb-8 text-lg leading-relaxed">Your trusted partner in professional claim processing services. We deliver excellence, reliability, and precision in every claim we handle with cutting-edge technology and expert care.</p>
+                    <div class="flex space-x-6">
+                        <a href="https://www.facebook.com/profile.php?id=61572941290909" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/trisecure-claims-5939b5399/" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/trisecureclaims/" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Quick Links</h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-cogs mr-2"></i>Services</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Contact Info</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <span class="text-gray-300">+91-9833-08-6355</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <span class="text-gray-300">trisecureclaims@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <span class="text-gray-300">Thane, Maharashtra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-12 pt-8 text-center">
+                <p class="text-gray-300 text-lg">&copy; 2024 TrisecureClaims. All rights reserved. | Designed with <i class="fas fa-heart text-orange-500"></i> for Healthcare Excellence</p>
+            </div>
+        </div>
+    </footer>
+
+  <script>
+        const defaultConfig = {
+            company_name: "ClaimsPro",
+            hero_headline: "Fast, Transparent & Reliable Reimbursement Claim Processing",
+            hero_description: "We simplify and accelerate your reimbursement claims with cutting-edge technology and expert processing. Get your claims approved faster with complete transparency and reliability you can trust.",
+            cta_button_text: "Submit Claim",
+            contact_email: "contact@claimspro.com",
+            contact_phone: "+1 (555) 123-4567",
+            background_color: "#ffffff",
+            surface_color: "#f8fafc",
+            text_color: "#111827",
+            primary_action_color: "#ea580c",
+            secondary_action_color: "#f97316",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        async function onConfigChange(config) {
+            // Update company name
+            const companyName = config.company_name || defaultConfig.company_name;
+            document.getElementById('nav-company-name').textContent = companyName;
+            document.getElementById('footer-company-name').textContent = companyName;
+
+            // Update hero content
+            document.getElementById('hero-headline').innerHTML = (config.hero_headline || defaultConfig.hero_headline).replace('Reimbursement Claim Processing', '<span class="text-orange-600">Reimbursement Claim Processing</span>');
+            document.getElementById('hero-description').textContent = config.hero_description || defaultConfig.hero_description;
+            document.getElementById('cta-button').textContent = config.cta_button_text || defaultConfig.cta_button_text;
+
+            // Update contact info
+            document.getElementById('footer-email').textContent = config.contact_email || defaultConfig.contact_email;
+            document.getElementById('footer-phone').textContent = config.contact_phone || defaultConfig.contact_phone;
+
+            // Apply colors
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+            document.body.style.backgroundColor = backgroundColor;
+            document.body.style.color = textColor;
+
+            // Apply font
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseFontStack = 'system-ui, -apple-system, sans-serif';
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+            // Apply font size
+            const baseSize = config.font_size || defaultConfig.font_size;
+            document.body.style.fontSize = `${baseSize}px`;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            window.elementSdk.setConfig({ background_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.surface_color || defaultConfig.surface_color,
+                        set: (value) => {
+                            config.surface_color = value;
+                            window.elementSdk.setConfig({ surface_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            window.elementSdk.setConfig({ text_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                        set: (value) => {
+                            config.primary_action_color = value;
+                            window.elementSdk.setConfig({ primary_action_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                        set: (value) => {
+                            config.secondary_action_color = value;
+                            window.elementSdk.setConfig({ secondary_action_color: value });
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        config.font_family = value;
+                        window.elementSdk.setConfig({ font_family: value });
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        config.font_size = value;
+                        window.elementSdk.setConfig({ font_size: value });
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["company_name", config.company_name || defaultConfig.company_name],
+                ["hero_headline", config.hero_headline || defaultConfig.hero_headline],
+                ["hero_description", config.hero_description || defaultConfig.hero_description],
+                ["cta_button_text", config.cta_button_text || defaultConfig.cta_button_text],
+                ["contact_email", config.contact_email || defaultConfig.contact_email],
+                ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
+            ]);
+        }
+
+        // Initialize the Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add click handlers for buttons
+        document.getElementById('cta-button').addEventListener('click', function() {
+            // Open claim form modal
+            openClaimForm('general');
+        });
+
+        // Form modal functions
+        function openClaimForm(planType) {
+            const modal = document.getElementById('claimFormModal');
+            const formTitle = document.getElementById('formTitle');
+            const planTypeField = document.getElementById('planType');
+            
+            // Set form title based on plan type
+            if (planType === 'standard') {
+                formTitle.textContent = 'Submit Standard Claim - 3500/-';
+            } else if (planType === 'advanced') {
+                formTitle.textContent = 'Submit Advanced Claim - 4500/-';
+            } else {
+                formTitle.textContent = 'Submit Your Claim';
+            }
+            
+            planTypeField.value = planType;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeClaimForm() {
+            const modal = document.getElementById('claimFormModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            
+            // Reset form
+            document.getElementById('claimForm').reset();
+        }
+
+        // Handle form submission
+        document.getElementById('claimForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const planType = formData.get('planType');
+            
+            // Determine which Formspree endpoint to use based on plan type
+            let formspreeEndpoint;
+            if (planType === 'standard') {
+                formspreeEndpoint = 'https://formspree.io/f/mpwylkyr'; // Replace with your standard plan Formspree ID
+            } else if (planType === 'advanced') {
+                formspreeEndpoint = 'https://formspree.io/f/xjkjgavg'; // Replace with your advanced plan Formspree ID
+            } else {
+                formspreeEndpoint = 'https://formspree.io/f/mpwylkyr'; // Replace with your general Formspree ID
+            }
+            
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+            
+            // Submit to Formspree
+            fetch(formspreeEndpoint, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success
+                    showSuccessMessage();
+                    closeClaimForm();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                // Error
+                showErrorMessage();
+            })
+            .finally(() => {
+                // Reset button
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
+        });
+
+        function showSuccessMessage() {
+            // Create and show success toast
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50';
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Claim submitted successfully! We'll contact you soon.</span>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+
+        function showErrorMessage() {
+            // Create and show error toast
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg z-50';
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>Failed to submit claim. Please try again.</span>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('claimFormModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeClaimForm();
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'995158a0218229f5',t:'MTc2MTU1OTIyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reimbursement Claim Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .form-container {
+      max-width: 600px;
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #004aad;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+      color: #333;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #004aad;
+      color: #fff;
+      border: none;
+      margin-top: 15px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00327a;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Reimbursement Claim Form</h2>
+
+    <form 
+      action="http://formies.dev/submit/8513b231-909d-4b09-ab39-2dd0738dad3d" 
+      method="POST" 
+      enctype="multipart/form-data">
+
+      <!-- Full Name -->
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" placeholder="Enter your full name" required />
+
+      <!-- Email -->
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" placeholder="Enter your email" required />
+
+      <!-- Claim Type -->
+      <label for="claimType">Claim Type</label>
+      <select name="claimType" id="claimType" required>
+        <option value="">Select type</option>
+        <option value="Medical">Medical</option>
+        <option value="Travel">Travel</option>
+        <option value="Insurance">Insurance</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <!-- Amount -->
+      <label for="amount">Amount to Reimburse</label>
+      <input type="number" name="amount" id="amount" placeholder="Enter amount" required />
+
+      <!-- Description -->
+      <label for="description">Description</label>
+      <textarea name="description" id="description" rows="4" placeholder="Add brief details of your claim..." required></textarea>
+
+      <!-- File Upload -->
+      <label for="document">Upload Supporting Documents (PDF/JPG/PNG)</label>
+      <input type="file" name="document" id="document" accept=".pdf,.jpg,.jpeg,.png" required />
+
+      <!-- Submit Button -->
+      <button type="submit">Submit Claim</button>
+    </form>
+  </div>
+</body>
+</html>

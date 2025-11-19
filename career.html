@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Trisecureclaims</title>
+    <script src="https://cdn.tailwindcss.com">
+             </script>
+              <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+       <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* ========================================
+           🧭 NAVIGATION CSS STYLES - START
+           ======================================== */
+         
+         .gradient-dark {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        }
+        
+    
+    /* Show dropdown with animation */
+    .nav-links li:hover .dropdown {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+        
+        /* ========================================
+           🧭 NAVIGATION CSS STYLES - END
+           ======================================== */
+        
+        .gradient-bg {
+        background: linear-gradient(135deg, #FF6B35 0%, #FF8A65 30%, #FFA726 60%, #FFB74D 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .stat-counter {
+            animation: countUp 2s ease-out;
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Removed fade-in animations for immediate display */
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- ========================================
+         🧭 NAVIGATION HTML STRUCTURE - START                    
+         ======================================== -->
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Navigation Bar</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            padding: 0 2rem;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(232, 119, 58, 0.1);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(232, 119, 58, 0.2);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e8773a, transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 90px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-placeholder {
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(232, 119, 58, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(232, 119, 58, 0.4);
+        }
+
+        .logo-placeholder:hover::before {
+            animation: logoShine 0.6s ease-in-out;
+        }
+
+        @keyframes logoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .company-name {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .company-name:hover {
+            color: #e8773a;
+            text-shadow: 0 0 10px rgba(232, 119, 58, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 3rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            padding: 1rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            display: block;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e8773a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e8773a;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #e8773a;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            display: inline-block;
+            margin-left: 8px;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid #ffffff;
+            transition: all 0.3s ease;
+            vertical-align: middle;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+            border-top-color: #e8773a;
+        }
+
+        .nav-link.active .dropdown-arrow {
+            border-top-color: #e8773a;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            min-width: 220px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1001;
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            color: #ffffff;
+            padding: 15px 24px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #e8773a, #ff9f5a);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .dropdown-item:hover {
+            color: #ffffff;
+            padding-left: 32px;
+            transform: translateX(8px);
+        }
+
+        .dropdown-item:hover::before {
+            width: 100%;
+        }
+
+        .dropdown-item.active {
+            background: linear-gradient(90deg, #e8773a, #ff9f5a);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+       
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000000;
+                flex-direction: column;
+                gap: 0;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+                border-top: 1px solid #333;
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-item {
+                border-bottom: 1px solid #333;
+            }
+
+            .nav-link {
+                padding: 1rem 2rem;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                background-color: #111;
+            }
+
+            .dropdown-item {
+                padding-left: 3rem;
+                background-color: #111;
+            }
+
+            .dropdown-item:hover {
+                padding-left: 3.5rem;
+            }
+
+            .company-name {
+                font-size: 18px;
+            }
+
+            .demo-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body data-page="home">
+  <nav class="navbar">
+   <div class="nav-container">
+    <div class="logo-section">
+     <div class="logo-placeholder">
+      
+     </div><img src="trisecurelogohalf.png" height="150px" width="300px">
+    </div>
+    <ul class="nav-menu" id="navMenu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-page="home" id="homeLink">Home</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-page="about" id="aboutLink">About Us</a></li>
+     <li class="nav-item dropdown"><a href="" class="nav-link" data-page="services" id="servicesLink">Services<span class="dropdown-arrow"></span></a>
+      <div class="dropdown-content"><a href="reimburstment.html" class="dropdown-item" data-page="reimbursement">Reimbursement</a> <a href="cashless.html" class="dropdown-item" data-page="cashless">Cashless</a> <a href="empanelment.html" class="dropdown-item" data-page="empanelment">Empanelment</a> <a href="raterevision.html" class="dropdown-item" data-page="rate-revision">Rate Revision</a> <a href="recovery.html" class="dropdown-item" data-page="recovery">Recovery</a> <a href="desksupport.html" class="dropdown-item" data-page="desk-support">Desk Support</a>
+      </div></li>
+     <li class="nav-item"><a href="career.html" class="nav-link" data-page="career" id="careerLink">Career</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-page="contact" id="contactLink">Contact</a></li>
+     <li class="nav-item"><a href="payment.html" class="nav-link" data-page="payment" id="paymentLink">Payment</a></li>
+    </ul>
+    <div class="mobile-menu-toggle" id="mobileToggle">
+     <div class="hamburger-line"></div>
+     <div class="hamburger-line"></div>
+     <div class="hamburger-line"></div>
+    </div>
+   </div>
+  </nav>
+
+  <script>
+        // Default configuration
+        const defaultConfig = {
+            company_name: "Your Company",
+            home_text: "Home",
+            about_text: "About Us",
+            services_text: "Services",
+            career_text: "Career",
+            payment_text: "Payment"
+        };
+
+        // Navigation functionality
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link[data-page]');
+            const dropdownItems = document.querySelectorAll('.dropdown-item[data-page]');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            // Set active state based on current page
+            function setActiveNavigation() {
+                const currentPage = document.body.getAttribute('data-page') || 'home';
+                
+                // Remove active class from all nav links and dropdown items
+                navLinks.forEach(link => link.classList.remove('active'));
+                dropdownItems.forEach(item => item.classList.remove('active'));
+                
+                // Set active state based on current page
+                if (currentPage === 'reimbursement' || currentPage === 'cashless' || 
+                    currentPage === 'empanelment' || currentPage === 'rate-revision' || 
+                    currentPage === 'recovery' || currentPage === 'desk-support') {
+                    // For service pages, activate both Services menu and specific service
+                    document.getElementById('servicesLink').classList.add('active');
+                    const activeDropdownItem = document.querySelector(`[data-page="${currentPage}"]`);
+                    if (activeDropdownItem) {
+                        activeDropdownItem.classList.add('active');
+                    }
+                } else {
+                    // For main pages, activate the corresponding nav link
+                    const activeNavLink = document.querySelector(`[data-page="${currentPage}"]`);
+                    if (activeNavLink) {
+                        activeNavLink.classList.add('active');
+                    }
+                }
+            }
+
+            // Mobile menu toggle
+            mobileToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.navbar')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+
+            // Set active navigation on page load
+            setActiveNavigation();
+        }
+
+        // Element SDK configuration
+        async function onConfigChange(config) {
+            const companyName = document.getElementById('companyName');
+            const homeLink = document.getElementById('homeLink');
+            const aboutLink = document.getElementById('aboutLink');
+            const servicesLink = document.getElementById('servicesLink');
+            const careerLink = document.getElementById('careerLink');
+            const paymentLink = document.getElementById('paymentLink');
+
+            if (companyName) companyName.textContent = config.company_name || defaultConfig.company_name;
+            if (homeLink) homeLink.textContent = config.home_text || defaultConfig.home_text;
+            if (aboutLink) aboutLink.textContent = config.about_text || defaultConfig.about_text;
+            if (servicesLink) servicesLink.textContent = config.services_text || defaultConfig.services_text;
+            if (careerLink) careerLink.textContent = config.career_text || defaultConfig.career_text;
+            if (paymentLink) paymentLink.textContent = config.payment_text || defaultConfig.payment_text;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["company_name", config.company_name || defaultConfig.company_name],
+                ["home_text", config.home_text || defaultConfig.home_text],
+                ["about_text", config.about_text || defaultConfig.about_text],
+                ["services_text", config.services_text || defaultConfig.services_text],
+                ["career_text", config.career_text || defaultConfig.career_text],
+                ["payment_text", config.payment_text || defaultConfig.payment_text]
+            ]);
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange,
+                    mapToCapabilities,
+                    mapToEditPanelValues
+                });
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99dd5eb3d2924272',t:'MTc2MzAyNzQ3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+    <!-- ========================================
+         🧭 NAVIGATION HTML STRUCTURE - END 
+         ======================================== -->
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Join Our Mission</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed opacity-90">
+                Be part of a revolutionary team transforming the claims industry with cutting-edge technology and innovative solutions.
+            </p>
+            <button onclick="scrollToForm()" class="bg-white text-orange-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Explore Opportunities
+            </button>
+        </div>
+    </section>
+    <!-- Why Join Us Section -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800 scroll-animate">Why Join Trisecureclaims?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Innovation First -->
+                <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100 card-hover scroll-animate">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Innovation First</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        We're at the forefront of technology, constantly pushing boundaries and creating solutions that reshape the industry.
+                    </p>
+                </div>
+
+                <!-- Amazing Team -->
+                <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-100 card-hover scroll-animate">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Amazing Team</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Work alongside brilliant minds from diverse backgrounds, all united by passion and commitment to excellence.
+                    </p>
+                </div>
+
+                <!-- Growth Focused -->
+                <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-100 card-hover scroll-animate">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Growth Focused</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Your career growth is our priority. We provide mentorship, training, and opportunities to advance your skills.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture & Impact Section -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- Culture -->
+            <div class="mb-16">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Our Culture</h2>
+                <div class="max-w-4xl mx-auto">
+                    <p class="text-xl text-gray-600 leading-relaxed mb-8 text-center">
+                        At Trisecureclaims, we believe in fostering an environment where creativity thrives, collaboration is key, and every voice matters. Our culture is built on trust, transparency, and the shared goal of making a meaningful impact.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                            <div class="w-3 h-3 bg-orange-500 rounded-full mr-4"></div>
+                            <span class="text-gray-700 font-medium">Flexible work arrangements</span>
+                        </div>
+                        <div class="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                            <div class="w-3 h-3 bg-orange-500 rounded-full mr-4"></div>
+                            <span class="text-gray-700 font-medium">Continuous learning opportunities</span>
+                        </div>
+                        <div class="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                            <div class="w-3 h-3 bg-orange-500 rounded-full mr-4"></div>
+                            <span class="text-gray-700 font-medium">Inclusive and diverse environment</span>
+                        </div>
+                        <div class="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                            <div class="w-3 h-3 bg-orange-500 rounded-full mr-4"></div>
+                            <span class="text-gray-700 font-medium">Work-life balance priority</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Impact Stats -->
+            <div class="text-center">
+                <h2 class="text-4xl font-bold mb-12 text-gray-800">Our Impact 🚀</h2>
+                <div class="grid md:grid-cols-4 gap-8 mb-12">
+                    <div class="p-6 bg-white rounded-2xl shadow-lg stat-counter">
+                        <div class="text-4xl font-bold text-orange-600 mb-2">35+</div>
+                        <div class="text-gray-600 font-medium">Team Members</div>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl shadow-lg stat-counter">
+                        <div class="text-4xl font-bold text-orange-600 mb-2">125+</div>
+                        <div class="text-gray-600 font-medium">Hospitals</div>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl shadow-lg stat-counter">
+                        <div class="text-4xl font-bold text-orange-600 mb-2">98%</div>
+                        <div class="text-gray-600 font-medium">Client Satisfaction</div>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl shadow-lg stat-counter">
+                        <div class="text-4xl font-bold text-orange-600 mb-2">1000+</div>
+                        <div class="text-gray-600 font-medium">Claim Processed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Application Form Section -->
+   <section class="py-20 px-6 bg-white" id="application-form">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4 text-gray-800">Apply Now</h2>
+            <p class="text-xl text-gray-600">Ready to join our team? Fill out the form below and we'll get back to you soon!</p>
+        </div>
+
+        <form action="https://formspree.io/f/xkgqgado" method="POST" class="bg-gray-50 p-8 rounded-2xl shadow-lg" id="applicationForm">
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+                </div>
+                <div>
+                    <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                    <input type="text" id="lastName" name="lastName" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                    <input type="email" id="email" name="email" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+                </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" title="Ten digits phone number (e.g. 1234567890)" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <label for="position" class="block text-sm font-medium text-gray-700 mb-2">Position of Interest *</label>
+                <select id="position" name="position" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+                    <option value="">Select a position</option>
+                    <option value="software-engineer">Sales Executive</option>
+                    <option value="data-scientist">Sales Head</option>
+                    <option value="product-manager">Processing</option>
+                    <option value="ui-ux-designer">HR</option>
+                    <option value="business-analyst">Claim Credit Officer</option>
+                    <option value="sales-representative">Smile Officer</option>
+                    <option value="customer-success">Desk Support Officer</option>
+                    <option value="customer-success">Processing Head</option>
+                    <option value="customer-success">General Manager</option>
+
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="mb-6">
+                <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Years of Experience *</label>
+                <select id="experience" name="experience" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+                    <option value="">Select experience level</option>
+                    <option value="0-1">0-1 years (Entry Level)</option>
+                    <option value="2-3">2-3 years</option>
+                    <option value="4-6">4-6 years</option>
+                    <option value="7-10">7-10 years</option>
+                    <option value="10+">10+ years (Senior Level)</option>
+                </select>
+            </div>
+            
+            <div class="mb-6">
+                <label for="coverLetter" class="block text-sm font-medium text-gray-700 mb-2">Cover Letter / Why do you want to join us?</label>
+                <textarea id="coverLetter" name="coverLetter" rows="5" placeholder="Tell us about yourself and why you're interested in joining Trisecureclaims..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"></textarea>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 items-center">
+                <button type="submit" id="submitButton" class="flex-1 w-full sm:w-auto bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+                    Submit Application
+                </button>
+                <button type="button" onclick="clearForm()" class="w-full sm:w-auto px-8 py-3 border-2 border-orange-600 text-orange-600 rounded-lg font-semibold hover:bg-orange-50 transition-all duration-300">
+                    Clear Form
+                </button>
+                <div id="status" class="mt-4 sm:mt-0 sm:ml-4 text-sm font-medium"></div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    // 1. Clear Form Function
+    function clearForm() {
+        document.getElementById('applicationForm').reset();
+        // Optionally clear status message upon clearing the form
+        document.getElementById('status').textContent = '';
+        document.getElementById('status').className = 'mt-4 sm:mt-0 sm:ml-4 text-sm font-medium';
+    }
+
+    // 2. Form Submission Handling (to Formspree)
+    document.getElementById('applicationForm').addEventListener("submit", async function(event) {
+        event.preventDefault(); // Stop the default form submission
+        
+        const form = event.target;
+        const status = document.getElementById('status');
+        const button = document.getElementById('submitButton');
+        const formData = new FormData(form);
+        
+        // Disable button and show loading state
+        button.disabled = true;
+        button.textContent = 'Submitting...';
+        status.textContent = 'Sending application...';
+        status.className = 'mt-4 sm:mt-0 sm:ml-4 text-sm font-medium text-gray-600';
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success
+                status.textContent = '✅ Application submitted successfully! We will be in touch.';
+                status.className = 'mt-4 sm:mt-0 sm:ml-4 text-sm font-medium text-green-600';
+                form.reset(); // Clear form on successful submission
+            } else {
+                // Failure (e.g., Formspree error or invalid data)
+                const data = await response.json();
+                if (Object.hasOwnProperty.call(data, 'errors')) {
+                    status.textContent = '❌ Submission Failed: ' + data["errors"].map(e => e.field).join(', ');
+                } else {
+                    status.textContent = '❌ Submission Failed: ' + (data.error || 'Please try again.');
+                }
+                status.className = 'mt-4 sm:mt-0 sm:ml-4 text-sm font-medium text-red-600';
+            }
+        } catch (error) {
+            // Network or other unexpected errors
+            status.textContent = '❌ An unexpected error occurred. Please check your connection.';
+            status.className = 'mt-4 sm:mt-0 sm:ml-4 text-sm font-medium text-red-600';
+            console.error(error);
+        } finally {
+            // Re-enable button
+            button.disabled = false;
+            button.textContent = 'Submit Application';
+        }
+    });
+</script>    <!-- Footer -->
+    <footer class="gradient-dark text-white py-16 relative overflow-hidden">
+        <div class="absolute top-0 left-0 text-orange-500 opacity-10">
+            <i class="fas fa-network-wired text-8xl"></i>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="text-3xl font-bold mb-6">
+                       <img src="trisecurelogohalf.png" height="150" width="350">
+                    </div>
+                    <p class="text-gray-300 mb-8 text-lg leading-relaxed">Your trusted partner in professional claim processing services. We deliver excellence, reliability, and precision in every claim we handle with cutting-edge technology and expert care.</p>
+                    <div class="flex space-x-6">
+                        <a href="https://www.facebook.com/profile.php?id=61572941290909" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/trisecure-claims-5939b5399/" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/trisecureclaims/" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Quick Links</h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-cogs mr-2"></i>Services</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Contact Info</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <span class="text-gray-300">+91-9833-08-6355</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <span class="text-gray-300">trisecureclaims@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <span class="text-gray-300">Thane, Maharashtra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-12 pt-8 text-center">
+                <p class="text-gray-300 text-lg">&copy; 2024 TrisecureClaims. All rights reserved. | Designed with <i class="fas fa-heart text-orange-500"></i> for Healthcare Excellence</p>
+            </div>
+        </div>
+    </footer>
+   
+
+
+    <script>
+        document.getElementById("applicationForm").addEventListener("submit", async function(e) {
+  e.preventDefault(); // prevent default redirect
+  const form = e.target;
+  const data = new FormData(form);
+  const response = await fetch(form.action, {
+    method:POST,
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  });
+
+  if (response.ok) {
+    document.getElementById("status").innerHTML = "✅ Thanks! Your message has been sent.";
+    form.reset();
+  } else {
+    document.getElementById("status").innerHTML = "❌ Oops! Something went wrong.";
+  }
+});
+        // Scroll to form function
+        function scrollToForm() {
+            document.getElementById('application-form').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Clear form function
+        function clearForm() {
+            document.getElementById('applicationForm').reset();
+        }
+
+        // Form submission handling
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Reset button after 3 seconds (in case of success or error)
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 3000);
+        });
+
+        // Add smooth scrolling and button interactions
+        document.querySelectorAll('button:not([type="submit"])').forEach(button => {
+            button.addEventListener('click', function() {
+                // Add a subtle click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Scroll animations
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe all scroll-animate elements
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // Animate stats on scroll
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = Math.random() * 0.5 + 's';
+                    entry.target.classList.add('stat-counter');
+                }
+            });
+        }, {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        document.querySelectorAll('.stat-counter').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+            // Select all nav links
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        // Remove active class from all
+        navLinks.forEach(l => l.classList.remove("active"));
+        // Add to the clicked one
+        link.classList.add("active");
+      });
+    });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98732fc07476441b',t:'MTc1OTIyOTcxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

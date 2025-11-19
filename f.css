@@ -1,0 +1,95 @@
+Create a clean,modern,and responsive single-page website for ClaimCare Pvt. Ltd. — designed for payment gateway/checkout with Razorpay integration.
+The site should be trust-inspiring,secure,and optimized for both desktop and mobile devices.
+🧭 Page Structure & Requirements
+1.Top Header
+Left: Company logo placeholder — ClaimCare Pvt.Ltd.
+Right:
+📞+91 98765 43210
+✉️support@claimcare.in
+Background: subtle white with light shadow and sticky on scroll.
+2.Hero Section
+Headline:“Secure Payments for ClaimCare”
+Subtext:“Fast, transparent, and secure payments for reimbursements, desk support, rate revisions, and advances.”
+Primary CTA:“Pay Now” (scrolls to payment form)
+Secondary CTA:“View Pricing” (scrolls to pricing section)
+Trust Icons Row:small icons + labels:
+🔒SSL Secured
+💳Razorpay Verified
+🧾GST Invoice Available
+Modern blue background gradient with subtle illustrations representing finance or protection.
+3.Payment Form Section (Main Card)
+Card-style centered form with rounded corners, light shadow, and white background.
+Form Fields:
+First Name(required)
+Last Name(required)
+Email(opt)
+Select Service(dropdown):
+Reimbursement — ₹3500
+Cashless Desk Support — ₹1200
+Rate Revision — ₹700
+Advance Reimbursement — ₹800
+Description(short text field)
+When the user selects a service, the total price dynamically updates on the CTA button.
+Extras:
+Checkbox: “I agree to the Terms & Conditions.”
+Linked text opens a modal popup showing detailed Terms & Conditions.
+Primary CTA: “Pay ₹[dynamic price]”
+Secondary CTA: “Pay via Razorpay Link” → opens https://razorpay.me/@siddharthdineshkhade
+Inline Validation: Show friendly messages like
+“Please enter your first name.”
+“We use Razorpay for secure checkout. No card details are stored.”
+4. Pricing Summary Card
+Displyed to the right (on desktop) or below (on mobile).
+Shows:
+Selected Service Name
+Base Amount+2% gst
+Total Payable in bold.
+Card design matches the main form with light blue accents and clear type hierarchy.
+5. Payment Success Modal (After Payment)
+Once payment is complete:
+Show a branded success modal with green accent ✅
+Text: “Payment Successful!”
+Display:
+Payment ID: (placeholder format: #RZP123456789)
+Date & Time:
+Service Name
+Amount Paid
+User Details (name, email)
+Button: “Download Invoice (PDF)”
+🧾 Download Invoice Button Functionality:
+Clicking this  downloads a formatted invoice page (A4 layout) that includes:
+ClaimCare Solutions Pvt. Ltd. logo (placeholder)
+Company Name, Address, Email, Phone, GST Number
+Invoice Number and Date of Payment
+Billed To: [Customer Name & Email]
+Service Details (Service Type, Price, GST, Total)
+Payment ID and “Paid via Razorpay” note
+Digital Signature / Authorized Signatory Placeholder
+footer: “Thank you for your payment. For queries, contact support@claimcare.in
+💡 Hidden Page: Create a separate Invoice Template Page (A4) in Canva — linked to the “Download Invoice” button. It should be exportable as PDF for download.
+6.Footer
+Company name, address placeholder
+GST/CIN/Registration Number placeholder
+Social media icons:LinkedIn,Instagram,Facebook
+Subtle grey background and small text
+“© 2025 ClaimCare Pvt.Ltd.|All rights reserved.”
+🎨 Design & Branding Guidelines
+PrimaryColor:orange
+AccentColor:Green #22C55E
+NeutralShades:range
+Fonts:Open Sans
+Buttons:Rounded (8px), shadowed, hover transitions
+Cards:Soft white with shadow, 16px padding, 8px radius
+Icons:Minimal line icons (security, invoice, support)
+📱Responsive Requirements
+On mobile, the CTA (“Pay ₹...”) remains always visible above the fold.
+Pricing summary collapses below form with subtle divider.
+All text reflows gracefully with padding adjustments.
+🧩Deliverables
+Canva Website format (.CW or shared link)
+Interactive:
+Modal for Terms & Conditions
+Dynamic pricing text linked to dropdown
+Razorpay link buttons
+Success modal with“Download Invoice” button
+Hidden A4 invoice page (exportable as PDF)

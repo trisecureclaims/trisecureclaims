@@ -1,0 +1,1825 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trisecure Claims Payment Gateway</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      color: #1f2937;
+      background: #f9fafb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    
+        
+
+        .dropdown-item:hover {
+            background-color: #2a2a2a;
+            color: #e8773a;
+            border-left-color: #e8773a;
+            padding-left: 28px;
+        }
+
+        .dropdown-item.active {
+            color: #e8773a;
+            border-left-color: #e8773a;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        @media (max-width: 968px) {
+            .nav-container {
+                padding: 0 20px;
+                flex-wrap: wrap;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                background-color: #000000;
+                padding: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 18px 24px;
+                border-bottom: 1px solid #2a2a2a;
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: #0a0a0a;
+                border-top: none;
+                border-left: 3px solid #e8773a;
+                margin-left: 20px;
+                display: none;
+            }
+
+            .nav-item.dropdown-active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-item {
+                padding: 12px 24px;
+                font-size: 13px;
+            }
+
+            .dropdown-item:hover {
+                padding-left: 28px;
+            }
+        }
+
+        .demo-content {
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+
+        .demo-content h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .demo-content p {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        /*end*/
+
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: px px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f97316;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    /* Hero Section */
+    .hero {
+    background: linear-gradient(135deg, #e65c00 0%, #f9d423 100%);
+      color: white;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin: 0 0 32px 0;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: #f97316;
+      color: white;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #ea580c;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(249, 115, 22, 0.5);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #3b82f6;
+    }
+
+    .btn-secondary:hover {
+      background: #f3f4f6;
+      transform: translateY(-2px);
+    }
+
+    .trust-icons {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 20px;
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1200px;
+      margin: -40px auto 80px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+      margin: 0 0 24px 0;
+      font-size: 28px;
+      color: #1f2937;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: 'Open Sans', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-size: 13px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: start;
+      gap: 8px;
+      margin: 24px 0;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: auto;
+      margin-top: 4px;
+    }
+
+    .checkbox-group label {
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .terms-link {
+      color: #3b82f6;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .terms-link:hover {
+      color: #2563eb;
+    }
+
+    .form-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .btn-razorpay {
+      background: #528ff0;
+      color: white;
+    }
+
+    .btn-razorpay:hover {
+      background: #3b7dd6;
+    }
+
+    .security-note {
+      text-align: center;
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ffffff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Pricing Summary */
+    .pricing-summary {
+      position: sticky;
+      top: 100px;
+    }
+
+    .pricing-summary h3 {
+      margin: 0 0 20px 0;
+      font-size: 20px;
+      color: #1f2937;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .summary-row.total {
+      border-top: 2px solid #e5e7eb;
+      padding-top: 12px;
+      margin-top: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      color: #f97316;
+    }
+
+    .service-name {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+
+    .pricing-section h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 48px;
+      color: #1f2937;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .pricing-card h3 {
+      font-size: 20px;
+      margin: 0 0 16px 0;
+      color: #1f2937;
+    }
+
+    .pricing-card .price {
+      font-size: 36px;
+      font-weight: 700;
+      color: #f97316;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card .gst-note {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1f2937;
+      color: #9ca3af;
+      padding: 48px 24px 24px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer h4 {
+      color: white;
+      margin: 0 0 16px 0;
+      font-size: 18px;
+    }
+
+    .footer p {
+      margin: 8px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      background: #374151;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background: #f97316;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid #374151;
+      font-size: 14px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80%;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #f3f4f6;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background: #e5e7eb;
+    }
+
+    .modal h3 {
+      margin: 0 0 20px 0;
+      font-size: 24px;
+      color: #1f2937;
+    }
+
+    .modal p {
+      line-height: 1.6;
+      margin-bottom: 12px;
+      color: #4b5563;
+    }
+
+    /* Success Modal */
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: #22c55e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 32px;
+      color: white;
+    }
+  .gradient-dark {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        }
+    .success-details {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .detail-label {
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    .detail-value {
+      color: #1f2937;
+      text-align: right;
+    }
+
+    /* Invoice Page */
+    .invoice-page {
+      display: none;
+      background: white;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px;
+    }
+
+    .invoice-page.active {
+      display: block;
+    }
+
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .invoice-logo {
+      font-size: 32px;
+      font-weight: 700;
+      color: #f97316;
+    }
+
+    .invoice-title {
+      text-align: right;
+    }
+
+    .invoice-title h1 {
+      margin: 0;
+      font-size: 36px;
+      color: #1f2937;
+    }
+
+    .invoice-number {
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    .invoice-section {
+      margin-bottom: 32px;
+    }
+
+    .invoice-section h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+    }
+
+    .invoice-table th {
+      background: #f9fafb;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .invoice-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .invoice-table .total-row {
+      font-weight: 700;
+      font-size: 18px;
+      color: #f97316;
+    }
+
+    .invoice-footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 2px solid #e5e7eb;
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .signature-section {
+      margin-top: 48px;
+      text-align: left;
+    }
+
+    .signature-line {
+      border-top: 2px solid #1f2937;
+      width: 200px;
+      
+      margin-top: 25px;
+      padding-top: 8px;
+      font-size: 14px;
+      color: #6b7280;
+      text-align: left;
+    }
+   #company-name{
+    height: 100px;
+    width: 220px;
+   }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .main-content {
+        grid-template-columns: 1fr;
+        margin-top: 24px;
+      }
+
+      .pricing-summary {
+        position: static;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-info {
+        font-size: 12px;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .invoice-page {
+        padding: 24px;
+      }
+
+      .invoice-header {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .invoice-title {
+        text-align: left;
+      }
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      .invoice-page, .invoice-page * {
+        visibility: visible;
+      }
+      .invoice-page {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
+   #signn{
+    height: 75px;
+    width: 150px;
+   }
+   #logoo{
+   height: 80px;
+   width: 225px;
+   }
+    .navbar {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            padding: 0 2rem;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(232, 119, 58, 0.1);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(232, 119, 58, 0.2);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e8773a, transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 90px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-placeholder {
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(232, 119, 58, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(232, 119, 58, 0.4);
+        }
+
+        .logo-placeholder:hover::before {
+            animation: logoShine 0.6s ease-in-out;
+        }
+
+        @keyframes logoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .company-name {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .company-name:hover {
+            color: #e8773a;
+            text-shadow: 0 0 10px rgba(232, 119, 58, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 3rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 525;
+            padding: 1rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            display: block;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e8773a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e8773a;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #e8773a;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            display: inline-block;
+            margin-left: 8px;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid #ffffff;
+            transition: all 0.3s ease;
+            vertical-align: middle;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+            border-top-color: #e8773a;
+        }
+
+        .nav-link.active .dropdown-arrow {
+            border-top-color: #e8773a;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            min-width: 220px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1001;
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            color: #ffffff;
+            padding: 15px 24px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #e8773a, #ff9f5a);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .dropdown-item:hover {
+            color: #ffffff;
+            padding-left: 32px;
+            transform: translateX(8px);
+        }
+
+        .dropdown-item:hover::before {
+            width: 100%;
+        }
+
+        .dropdown-item.active {
+            background: linear-gradient(90deg, #e8773a, #ff9f5a);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+       
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000000;
+                flex-direction: column;
+                gap: 0;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+                border-top: 1px solid #333;
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-item {
+                border-bottom: 1px solid #333;
+            }
+
+            .nav-link {
+                padding: 1rem 2rem;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                background-color: #111;
+            }
+
+            .dropdown-item {
+                padding-left: 3rem;
+                background-color: #111;
+            }
+
+            .dropdown-item:hover {
+                padding-left: 3.5rem;
+            }
+
+            .company-name {
+                font-size: 18px;
+            }
+
+            .demo-content 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   h1 {
+                font-size: 2rem;
+            }
+        }
+ 
+  </style>
+ </head>
+ <body>
+   <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+   <nav class="navbar">
+   <div class="nav-container">
+    <div class="logo-section">
+     <div class="logo-placeholder">
+      
+     </div><img src="trisecurelogohalf.png" height="38px" width="300px">
+    </div>
+    <ul class="nav-menu" id="navMenu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-page="home" id="homeLink">Home</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-page="about" id="aboutLink">About Us</a></li>
+     <li class="nav-item dropdown"><a href="" class="nav-link" data-page="services" id="servicesLink">Services<span class="dropdown-arrow"></span></a>
+      <div class="dropdown-content"><a href="reimburstment.html" class="dropdown-item" data-page="reimbursement">Reimbursement</a> <a href="cashless.html" class="dropdown-item" data-page="cashless">Cashless</a> <a href="empanelment.html" class="dropdown-item" data-page="empanelment">Empanelment</a> <a href="raterevision.html" class="dropdown-item" data-page="rate-revision">Rate Revision</a> <a href="recovery.html" class="dropdown-item" data-page="recovery">Recovery</a> <a href="desksupport.html" class="dropdown-item" data-page="desk-support">Desk Support</a>
+      </div></li>
+     <li class="nav-item"><a href="career.html" class="nav-link" data-page="career" id="careerLink">Career</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-page="contact" id="contactLink">Contact</a></li>
+     <li class="nav-item"><a href="payment.html" class="nav-link" data-page="payment" id="paymentLink">Payment</a></li>
+    </ul>
+    <div class="mobile-menu-toggle" id="mobileToggle">
+     <div class="hamburger-line"></div>
+     <div class="hamburger-line"></div>
+     <div class="hamburger-line"></div>
+    </div>
+   </div>
+  </nav>
+  <!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content">
+    <h1 id="hero-headline">Secure Payments for Trisecure Claims</h1>
+    <p id="hero-subtext">Fast, transparent, and secure payments for Reimbursements, Cashless, and Advance Reimbursement.</p>
+    <div class="cta-buttons"><button class="btn btn-primary" onclick="scrollToPayment()">Pay Now</button> 
+    <button class="btn btn-secondary" onclick="scrollToPricing()">View Pricing</button>
+    </div>
+    <div class="trust-icons">
+     <div class="trust-item"><span>🔒</span> <span>SSL Secured</span>
+     </div>
+     <div class="trust-item"><span>💳</span> <span>Razorpay Verified</span>
+     </div>
+     <div class="trust-item"><span>🧾</span> <span>GST Invoice Available</span>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- Main Content -->
+   
+
+  <div class="main-content" id="payment-section">
+
+  <!-- Payment Form -->
+
+   <div class="card">
+    <h2>Payment Details</h2>
+    <form id="payment-form">
+     <div class="form-row">
+      <div class="form-group"><label for="first-name">First Name *</label> <input type="text" id="first-name" required>
+       <div class="error-message" id="first-name-error">
+        Please enter your first name.
+       </div>
+      </div>
+      <div class="form-group"><label for="last-name">Last Name *</label> <input type="text" id="last-name" required>
+       <div class="error-message" id="last-name-error">
+        Please enter your last name.
+       </div>
+      </div>
+     </div>
+     <div class="form-group"><label for="email">Email *</label> <input type="email" id="email" required>
+      <div class="error-message" id="email-error">
+       Please enter a valid email address.
+      </div>
+     </div>
+     <div class="form-group"><label for="phone">Phone Number *</label> <input type="tel" id="phone" required placeholder="+91 98765 43210">
+      <div class="error-message" id="phone-error">
+       Please enter your phone number.
+      </div>
+     </div>
+     <div class="form-group"><label for="service">Select Service *</label> <select id="service" required> <option value="">Choose a service...</option> <option value="reimbursement" data-price="3500">Reimbursement — ₹3,500</option> <option value="cashless" data-price="1200">Cashless Desk Support — ₹1,200</option><option value="advance" data-price="4500">Advance Reimbursement — ₹4500</option> </select>
+      <div class="error-message" id="service-error">
+       Please select a service.
+      </div>
+     </div>
+     <div class="form-group"><label for="description">Description</label> <textarea id="description" placeholder="Add any additional details..."></textarea>
+     </div>
+     <div class="checkbox-group"><input type="checkbox" id="terms" required> <label for="terms">I agree to the <span class="terms-link" onclick="openTermsModal()">Terms &amp; Conditions</span>.</label>
+     </div>
+     <div class="error-message" id="terms-error" style="margin-top: -16px; margin-bottom: 16px;">
+      Please accept the terms and conditions.
+     </div>
+     <div class="form-buttons"><button type="submit" class="btn btn-primary btn-full" id="pay-button">Pay ₹0</button> <a href="https://razorpay.me/@siddharthdineshkhade" target="_blank" rel="noopener noreferrer" class="btn btn-razorpay btn-full">Pay via Razorpay Link</a>
+     </div>
+     <div class="security-note"><span>🔒</span> <span>We use Razorpay for secure checkout. No card details are stored.</span>
+     </div>
+    </form>
+   </div>
+   <!-- Pricing Summary -->
+   <div class="card pricing-summary">
+    <h3>Payment Summary</h3>
+    <div class="service-name" id="summary-service">
+     No service selected
+    </div>
+    <div class="summary-row"><span>Base Amount</span> <span id="summary-base">₹0</span>
+    </div>
+    <div class="summary-row"><span>GST (2%)</span> <span id="summary-gst">₹0</span>
+    </div>
+    <div class="summary-row total"><span>Total Payable</span> <span id="summary-total">₹0</span>
+    </div>
+   </div>
+  </div><!-- Pricing Section -->
+  <section class="pricing-section" id="pricing-section">
+   <h2>Our Services</h2>
+   <div class="pricing-grid">
+    <div class="pricing-card">
+     <h3>Reimbursement</h3>
+     <div class="price">
+      ₹3,500
+     </div>
+     <p class="gst-note">+ 2% GST</p>
+    </div>
+    <div class="pricing-card">
+     <h3>Cashless Desk Support</h3>
+     <div class="price">
+      ₹1,200
+     </div>
+     <p class="gst-note">+ 2% GST</p>
+    </div>
+    <div class="pricing-card">
+     <h3>Advance Reimbursement</h3>
+     <div class="price">
+      ₹4500
+     </div>
+     <p class="gst-note">+ 2% GST</p>
+    </div>
+   </div>
+  </section>
+  <!-- Footer -->
+<footer class="gradient-dark text-white py-16 relative overflow-hidden">
+        <div class="absolute top-0 left-0 text-orange-500 opacity-10">
+            <i class="fas fa-network-wired text-8xl"></i>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="text-3xl font-bold mb-6">
+                       <img src="trisecurelogohalf.png" height="150" width="350">
+                    </div>
+                    <p class="text-gray-300 mb-8 text-lg leading-relaxed">Your trusted partner in professional claim processing services. We deliver excellence, reliability, and precision in every claim we handle with cutting-edge technology and expert care.</p>
+                    <div class="flex space-x-6">
+                        <a href="https://www.facebook.com/profile.php?id=61572941290909" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/trisecure-claims-5939b5399/" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/trisecureclaims/" class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors duration-300 shadow-lg">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Quick Links</h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-cogs mr-2"></i>Services</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Contact Info</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <span class="text-gray-300">+91-9833-08-6355</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <span class="text-gray-300">trisecureclaims@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <span class="text-gray-300">Thane, Maharashtra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-12 pt-8 text-center">
+                <p class="text-gray-300 text-lg">&copy; 2024 TrisecureClaims. All rights reserved. | Designed with <i class="fas fa-heart text-orange-500"></i> for Healthcare Excellence</p>
+            </div>
+        </div>
+    </footer>
+  <!-- Terms Modal -->
+  <div class="modal" id="terms-modal">
+   <div class="modal-content"><button class="modal-close" onclick="closeTermsModal()">×</button>
+    <h3>Terms &amp; Conditions</h3>
+    <p><strong>1. Payment Terms</strong></p>
+    <p>All payments are processed securely through Razorpay. By proceeding with payment, you agree to Razorpay's terms of service.</p>
+    <p><strong>2. Service Delivery</strong></p>
+    <p>Services will be initiated within 24-48 hours of payment confirmation. Processing times may vary based on the service selected.</p>
+    <p><strong>3. Refund Policy</strong></p>
+    <p>Refunds are processed within 7-10 business days for eligible cases. Service fees are non-refundable once processing has begun.</p>
+    <p><strong>4. Data Privacy</strong></p>
+    <p>We collect and process your personal information in accordance with applicable data protection laws. Your payment information is never stored on our servers.</p>
+    <p><strong>5. GST &amp; Invoicing</strong></p>
+    <p>All prices are exclusive of GST. A GST invoice will be provided upon successful payment completion.</p>
+    <p><strong>6. Contact</strong></p>
+    <p>For any queries or concerns, please contact us at trisecureclaims@gmail.com or call +91 98330 86355.</p>
+   </div>
+  </div>
+  <!-- Success Modal -->
+  <div class="modal" id="success-modal">
+   <div class="modal-content"><button class="modal-close" onclick="closeSuccessModal()">×</button>
+    <div class="success-icon">
+     ✓
+    </div>
+    <h3 style="text-align: center; color: #22c55e;">Payment Successful!</h3>
+    <p style="text-align: center;">Thank you for your payment. Your transaction has been completed successfully.</p>
+    <div class="success-details">
+     <div class="detail-row"><span class="detail-label">Payment ID:</span> <span class="detail-value" id="payment-id">#RZP123456789</span>
+     </div>
+     <div class="detail-row"><span class="detail-label">Date &amp; Time:</span> <span class="detail-value" id="payment-date">-</span>
+     </div>
+     <div class="detail-row"><span class="detail-label">Service:</span> <span class="detail-value" id="payment-service">-</span>
+     </div>
+     <div class="detail-row"><span class="detail-label">Amount Paid:</span> <span class="detail-value" id="payment-amount">₹0</span>
+     </div>
+     <div class="detail-row"><span class="detail-label">Customer Name:</span> <span class="detail-value" id="payment-customer">-</span>
+     </div>
+     <div class="detail-row"><span class="detail-label">Email:</span> <span class="detail-value" id="payment-email">-</span>
+     </div>
+    </div><button class="btn btn-primary btn-full" onclick="downloadInvoice()">Download Invoice (PDF)</button>
+   </div>
+  </div>
+  <!-- Invoice Page (Hidden) -->
+  <div class="invoice-page" id="invoice-page">
+   <div class="invoice-header">
+    <div>
+     <div class="invoice-logo">
+      <img src="truisecure logo png.png" id="logoo">
+     </div>
+     <p style="margin: 8px 0 0 0; color: #6b7280;"></p>
+    </div>
+    <div class="invoice-title">
+     <h1>INVOICE</h1>
+     <p class="invoice-number" id="invoice-number">Invoice #INV-2025-001</p>
+    </div>
+   </div>
+   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px;">
+    <div class="invoice-section">
+     <h3>From:</h3>
+     <p style="margin: 0; font-weight: 600;">Trisecure Claims</p>
+     <p style="margin: 4px 0 0 0; color: #6b7280; line-height: 1.6;">Savarkar Nagar, Thane, India.<br>
+       Mumbai, India<br>
+       GST: 27XXXXX1234X1ZX<br>
+       Email: trisecureclaims@gmail.com <br>
+       Phone: +91 98330 86355</p>
+    </div>
+    <div class="invoice-section">
+     <h3>Billed To:</h3>
+     <p style="margin: 0; font-weight: 600;" id="invoice-customer-name">-</p>
+     <p style="margin: 4px 0 0 0; color: #6b7280;" id="invoice-customer-email">-</p>
+     <p style="margin: 8px 0 0 0; color: #6b7280;"><strong>Payment Date:</strong> <span id="invoice-date">-</span></p>
+    </div>
+   </div>
+   <table class="invoice-table">
+    <thead>
+     <tr>
+      <th>Description</th>
+      <th style="text-align: right;">Amount</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td id="invoice-service-name">Service</td>
+      <td style="text-align: right;" id="invoice-base-amount">₹0</td>
+     </tr>
+     <tr>
+      <td>GST (2%)</td>
+      <td style="text-align: right;" id="invoice-gst-amount">₹0</td>
+     </tr>
+     <tr class="total-row">
+      <td><strong>Total Amount</strong></td>
+      <td style="text-align: right;"><strong id="invoice-total-amount">₹0</strong></td>
+     </tr>
+    </tbody>
+   </table>
+   <div style="background: #f9fafb; padding: 16px; border-radius: 8px; margin: 24px 0;">
+    <p style="margin: 0; font-size: 14px; color: #6b7280;"><strong>Payment ID:</strong> <span id="invoice-payment-id">-</span><br><strong>Payment Method:</strong> Paid via Razorpay</p>
+   </div>
+   <div class="signature-section">
+    <p style="margin: 0; color: #6b7280; font-size: 14px;">Authorized Signatory</p>
+     <span><img src="signn.png" id="signn"></span>
+    <div class="signature-line">   
+      Siddharth Khade(CEO & Co- Founder)
+    </div>
+   </div>
+   <div class="invoice-footer">
+    <p>Thank you for your payment!</p>
+    <p>For any queries, please contact trisecureclaims@gmail.com</p>
+   </div>
+  </div>
+  <script>
+    // ============================================
+    // RAZORPAY CONFIGURATION
+    // ============================================
+    // ⚠️ IMPORTANT: Add your Razorpay credentials here
+    // Get these from: https://dashboard.razorpay.com/app/keys
+    
+    const RAZORPAY_KEY_ID = 'rzp_test_RbboyrPJ0WCWjt';  // 👈 PUT YOUR KEY_ID HERE (e.g., 'rzp_test_xxxxx')
+    
+    // ⚠️ WARNING: NEVER put key_secret in frontend code!
+    // For production, you need a backend server to:
+    // 1. Create orders using key_secret
+    // 2. Verify payment signatures
+    // This demo uses test mode without backend verification
+    // ============================================
+
+    const defaultConfig = {
+      company_name: "Trisecure Claims",
+      phone_number: "+91 98330 86355",
+      email_address: "trisecureclaims@gmail.com",
+      hero_headline: "Secure Payments for Trisecure Claims",
+      hero_subtext: "Fast, transparent, and secure payments for reimbursements, desk support, rate revisions, and advances.",
+      company_address: "Savarkar Nagar, Thane, India",
+      gst_number: "GST: 27XXXXX1234X1ZX"
+    };
+
+    let currentPaymentData = {};
+
+    // Service selection handler
+    document.getElementById('service').addEventListener('change', function() {
+      const selectedOption = this.options[this.selectedIndex];
+      const price = parseInt(selectedOption.dataset.price) || 0;
+      const serviceName = selectedOption.text;
+      
+      if (price > 0) {
+        const gst = Math.round(price * 0.02);
+        const total = price + gst;
+        
+        document.getElementById('summary-service').textContent = serviceName;
+        document.getElementById('summary-base').textContent = `₹${price.toLocaleString('en-IN')}`;
+        document.getElementById('summary-gst').textContent = `₹${gst.toLocaleString('en-IN')}`;
+        document.getElementById('summary-total').textContent = `₹${total.toLocaleString('en-IN')}`;
+        document.getElementById('pay-button').textContent = `Pay ₹${total.toLocaleString('en-IN')}`;
+      } else {
+        document.getElementById('summary-service').textContent = 'No service selected';
+        document.getElementById('summary-base').textContent = '₹0';
+        document.getElementById('summary-gst').textContent = '₹0';
+        document.getElementById('summary-total').textContent = '₹0';
+        document.getElementById('pay-button').textContent = 'Pay ₹0';
+      }
+    });
+
+    // Form submission with Razorpay integration
+    document.getElementById('payment-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Clear previous errors
+      document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+      
+      // Validate
+      let isValid = true;
+      
+      const firstName = document.getElementById('first-name').value.trim();
+      if (!firstName) {
+        document.getElementById('first-name-error').style.display = 'block';
+        isValid = false;
+      }
+      
+      const lastName = document.getElementById('last-name').value.trim();
+      if (!lastName) {
+        document.getElementById('last-name-error').style.display = 'block';
+        isValid = false;
+      }
+
+      const email = document.getElementById('email').value.trim();
+      if (!email || !email.includes('@')) {
+        document.getElementById('email-error').style.display = 'block';
+        isValid = false;
+      }
+
+      const phone = document.getElementById('phone').value.trim();
+      if (!phone) {
+        document.getElementById('phone-error').style.display = 'block';
+        isValid = false;
+      }
+      
+      const service = document.getElementById('service').value;
+      if (!service) {
+        document.getElementById('service-error').style.display = 'block';
+        isValid = false;
+      }
+      
+      const terms = document.getElementById('terms').checked;
+      if (!terms) {
+        document.getElementById('terms-error').style.display = 'block';
+        isValid = false;
+      }
+      
+      if (!isValid) return;
+
+      // Check if Razorpay key is configured
+      if (RAZORPAY_KEY_ID === 'YOUR_KEY_ID_HERE') {
+        showInlineMessage('Please configure your Razorpay KEY_ID in the code. Check the JavaScript section for instructions.', 'error');
+        return;
+      }
+      
+      // Get payment details
+      const selectedOption = document.getElementById('service').options[document.getElementById('service').selectedIndex];
+      const price = parseInt(selectedOption.dataset.price) || 0;
+      const gst = Math.round(price * 0.02);
+      const total = price + gst;
+      const serviceName = selectedOption.text.split('—')[0].trim();
+      
+      // Show loading state
+      const payButton = document.getElementById('pay-button');
+      const originalButtonText = payButton.innerHTML;
+      payButton.disabled = true;
+      payButton.innerHTML = '<span class="loading-spinner"></span> Processing...';
+
+      // Razorpay options
+      const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: total * 100, // Amount in paise
+        currency: 'INR',
+        name: 'Trisecure Claims',
+        description: serviceName,
+        image: 'trisecure logo png.png', // Add your logo URL here if you have one
+        prefill: {
+          name: `${firstName} ${lastName}`,
+          email: email,
+          contact: phone
+        },
+        notes: {
+          service: serviceName,
+          description: document.getElementById('description').value
+        },
+        theme: {
+          color: '#f97316'
+        },
+        handler: function(response) {
+          // Payment successful
+          handlePaymentSuccess(response, {
+            firstName,
+            lastName,
+            email,
+            phone,
+            serviceName,
+            price,
+            gst,
+            total
+          });
+        },
+        modal: {
+          ondismiss: function() {
+            // User closed the payment modal
+            payButton.disabled = false;
+            payButton.innerHTML = originalButtonText;
+          }
+        }
+      };
+
+      // Open Razorpay checkout
+      try {
+        const rzp = new Razorpay(options);
+        
+        rzp.on('payment.failed', function(response) {
+          payButton.disabled = false;
+          payButton.innerHTML = originalButtonText;
+          showInlineMessage('Payment failed: ' + response.error.description, 'error');
+        });
+        
+        rzp.open();
+      } catch (error) {
+        payButton.disabled = false;
+        payButton.innerHTML = originalButtonText;
+        showInlineMessage('Error initializing payment. Please try again.', 'error');
+      }
+    });
+
+    function handlePaymentSuccess(razorpayResponse, customerData) {
+      // Store payment data
+      currentPaymentData = {
+        paymentId: razorpayResponse.razorpay_payment_id,
+        orderId: razorpayResponse.razorpay_order_id || 'N/A',
+        signature: razorpayResponse.razorpay_signature || 'N/A',
+        date: new Date().toLocaleString('en-IN', { 
+          day: '2-digit', 
+          month: 'short', 
+          year: 'numeric', 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        }),
+        service: customerData.serviceName,
+        amount: customerData.total,
+        baseAmount: customerData.price,
+        gstAmount: customerData.gst,
+        customerName: `${customerData.firstName} ${customerData.lastName}`,
+        email: customerData.email,
+        phone: customerData.phone
+      };
+      
+      // Show success modal
+      document.getElementById('payment-id').textContent = `#${currentPaymentData.paymentId}`;
+      document.getElementById('payment-date').textContent = currentPaymentData.date;
+      document.getElementById('payment-service').textContent = currentPaymentData.service;
+      document.getElementById('payment-amount').textContent = `₹${currentPaymentData.amount.toLocaleString('en-IN')}`;
+      document.getElementById('payment-customer').textContent = currentPaymentData.customerName;
+      document.getElementById('payment-email').textContent = currentPaymentData.email;
+      
+      document.getElementById('success-modal').classList.add('active');
+
+      // Reset button
+      const payButton = document.getElementById('pay-button');
+      payButton.disabled = false;
+      const selectedOption = document.getElementById('service').options[document.getElementById('service').selectedIndex];
+      const price = parseInt(selectedOption.dataset.price) || 0;
+      const gst = Math.round(price * 0.02);
+      const total = price + gst;
+      payButton.textContent = `Pay ₹${total.toLocaleString('en-IN')}`;
+    }
+
+    function showInlineMessage(message, type) {
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'error' ? '#ef4444' : '#22c55e'};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        max-width: 400px;
+        animation: slideIn 0.3s ease;
+      `;
+      messageDiv.textContent = message;
+      document.body.appendChild(messageDiv);
+
+      setTimeout(() => {
+        messageDiv.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => messageDiv.remove(), 300);
+      }, 5000);
+    }
+
+    function scrollToPayment() {
+      document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scrollToPricing() {
+      document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function openTermsModal() {
+      document.getElementById('terms-modal').classList.add('active');
+    }
+
+    function closeTermsModal() {
+      document.getElementById('terms-modal').classList.remove('active');
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('success-modal').classList.remove('active');
+      // Reset form
+      document.getElementById('payment-form').reset();
+      document.getElementById('service').dispatchEvent(new Event('change'));
+    }
+
+    function downloadInvoice() {
+      // Populate invoice
+      const invoiceNumber = `INV-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 1000)).padStart(3, '0')}`;
+      document.getElementById('invoice-number').textContent = `Invoice #${invoiceNumber}`;
+      document.getElementById('invoice-customer-name').textContent = currentPaymentData.customerName;
+      document.getElementById('invoice-customer-email').textContent = currentPaymentData.email;
+      document.getElementById('invoice-date').textContent = currentPaymentData.date;
+      document.getElementById('invoice-service-name').textContent = currentPaymentData.service;
+      document.getElementById('invoice-base-amount').textContent = `₹${currentPaymentData.baseAmount.toLocaleString('en-IN')}`;
+      document.getElementById('invoice-gst-amount').textContent = `₹${currentPaymentData.gstAmount.toLocaleString('en-IN')}`;
+      document.getElementById('invoice-total-amount').textContent = `₹${currentPaymentData.amount.toLocaleString('en-IN')}`;
+      document.getElementById('invoice-payment-id').textContent = currentPaymentData.paymentId;
+      
+      // Show invoice page temporarily
+      const invoicePage = document.getElementById('invoice-page');
+      invoicePage.classList.add('active');
+      
+      // Generate PDF using html2canvas and jsPDF
+      setTimeout(() => {
+        html2canvas(invoicePage, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          backgroundColor: '#ffffff'
+        }).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const { jsPDF } = window.jspdf;
+          const pdf = new jsPDF('p', 'mm', 'a4');
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = pdf.internal.pageSize.getHeight();
+          const imgWidth = pdfWidth;
+          const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+          
+          let heightLeft = imgHeight;
+          let position = 0;
+          
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pdfHeight;
+          
+          while (heightLeft > 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pdfHeight;
+          }
+          
+          pdf.save(`${invoiceNumber}_TrisecureClaims.pdf`);
+          
+          // Hide invoice page
+          invoicePage.classList.remove('active');
+        }).catch(error => {
+          console.error('Error generating PDF:', error);
+          invoicePage.classList.remove('active');
+          showInlineMessage('Error generating PDF. Please try again.', 'error');
+        });
+      }, 100);
+    }
+
+    // Initialize Element SDK
+    async function onConfigChange(config) {
+      document.getElementById('company-name').textContent = config.company_name || defaultConfig.company_name;
+      document.getElementById('phone-number').textContent = config.phone_number || defaultConfig.phone_number;
+      document.getElementById('email-address').textContent = config.email_address || defaultConfig.email_address;
+      document.getElementById('hero-headline').textContent = config.hero_headline || defaultConfig.hero_headline;
+      document.getElementById('hero-subtext').textContent = config.hero_subtext || defaultConfig.hero_subtext;
+      document.getElementById('company-address').textContent = config.company_address || defaultConfig.company_address;
+      document.getElementById('gst-number').textContent = config.gst_number || defaultConfig.gst_number;
+      
+      // Update footer
+      document.getElementById('footer-company-name').textContent = config.company_name || defaultConfig.company_name;
+      document.getElementById('footer-email').textContent = config.email_address || defaultConfig.email_address;
+      document.getElementById('footer-phone').textContent = config.phone_number || defaultConfig.phone_number;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig: defaultConfig,
+        onConfigChange: onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["company_name", config.company_name || defaultConfig.company_name],
+          ["phone_number", config.phone_number || defaultConfig.phone_number],
+          ["email_address", config.email_address || defaultConfig.email_address],
+          ["hero_headline", config.hero_headline || defaultConfig.hero_headline],
+          ["hero_subtext", config.hero_subtext || defaultConfig.hero_subtext],
+          ["company_address", config.company_address || defaultConfig.company_address],
+          ["gst_number", config.gst_number || defaultConfig.gst_number]
+        ])
+      });
+    }
+  </script>
+  
+  
+</html>
